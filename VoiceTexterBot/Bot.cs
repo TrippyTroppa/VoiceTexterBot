@@ -10,6 +10,7 @@ using Telegram.Bot.Exceptions;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
+using VoiceTexterBot.Controllers;
 
 namespace VoiceTexterBot
 {
@@ -51,7 +52,7 @@ namespace VoiceTexterBot
             }
         }
 
-        Task HandleError(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
+         Task HandleError(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
         {
             // Задаем сообщение об ошибке в зависимости от того, какая именно ошибка произошла
             var errorMessage = exception switch
@@ -59,8 +60,9 @@ namespace VoiceTexterBot
                 ApiRequestException apiRequestException
                     => $"Telegram API Error:\n[{apiRequestException.ErrorCode}]\n{apiRequestException.Message}",
                 _ => exception.ToString()
-            };
 
+            };
+           
             // Выводим в консоль информацию об ошибке
             Console.WriteLine(errorMessage);
 
